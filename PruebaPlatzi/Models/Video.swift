@@ -20,9 +20,11 @@ class Video: Object, Identifiable, Decodable {
     @objc dynamic var localImageUrl: String? = nil
     var videoFiles = List<VideoFile>()
     var videoPictures = List<VideoPicture>()
+    
     override static func primaryKey() -> String? {
         return "id"
     }
+    
     private enum CodingKeys: String, CodingKey {
         case id, width, height, url, image, duration, user, videoFiles, videoPictures
     }

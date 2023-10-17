@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import RealmSwift
 
 class ListViewViewModel: ObservableObject {
     @Published var videos: [Video] = []
@@ -14,7 +15,9 @@ class ListViewViewModel: ObservableObject {
     @Published var error: Error? = nil
 
     private var videoManager = VideoManager()
+    private var realmService = RealmService()
     private var cancellables = Set<AnyCancellable>()
+    private var connectivityMonitor = ConnectivityMonitor()
 
     init() {
         fetchVideos()
@@ -22,16 +25,42 @@ class ListViewViewModel: ObservableObject {
 
     func fetchVideos() {
         isLoading = true
+
+        // Verificar la conectividad antes de intentar hacer una petición
+        if connectivityMonitor.isConnected {
+            Task {
+                do {
+                    let videosFetched = try await VideoLoader().fetchAndUpdateVideos()
+                    
+                    // Guardar y recuperar los videos de Realm
+                    let videosSaved = try await realmService.saveAndFetchVideos(videos: videosFetched)
+                    
+                    DispatchQueue.main.async {
+                        self.videos = videosSaved
+                        self.isLoading = false
+                    }
+                } catch {
+                    // Si hay un error al obtener los videos desde el API, intentamos obtenerlos desde Realm.
+                    fetchVideosFromDatabase()
+                }
+            }
+        } else {
+            fetchVideosFromDatabase()
+        }
+    }
+    
+    // Método para obtener los videos de Realm.
+    func fetchVideosFromDatabase() {
         Task {
             do {
-                let videosFetched = try await VideoLoader().fetchAndUpdateVideos()
+                let videosFetched = try await realmService.fetchVideosFromRealm()
                 DispatchQueue.main.async {
                     self.videos = videosFetched
                     self.isLoading = false
                 }
-            } catch {
+            } catch let realmError {
                 DispatchQueue.main.async {
-                    self.error = error
+                    self.error = realmError
                     self.isLoading = false
                 }
             }
@@ -42,7 +71,6 @@ class ListViewViewModel: ObservableObject {
         fetchVideos()
     }
 }
-
 
 /*
  do {

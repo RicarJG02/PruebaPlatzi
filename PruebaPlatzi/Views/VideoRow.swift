@@ -10,12 +10,20 @@ import SwiftUI
 struct VideoRow: View {
     var video: Video
     
+    var imageUrl: URL? {
+        if let localImageUrl = video.localImageUrl, !localImageUrl.isEmpty {
+            return URL(fileURLWithPath: localImageUrl)
+        } else {
+            return URL(string: video.image)
+        }
+    }
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            AsyncImage(url: URL(string: video.image)) { phase in
+            AsyncImage(url: imageUrl) { phase in
                 switch phase {
                 case .empty:
-                    AnyView (Rectangle().foregroundColor(.gray))
+                    AnyView(Rectangle().foregroundColor(.gray))
                 case .success(let image):
                     AnyView(image.resizable().aspectRatio(16/9, contentMode: .fit))
                 case .failure:
