@@ -22,12 +22,15 @@
 		8CD8C5DF2ADE0A3300051D9D /* ListViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8C5DE2ADE0A3300051D9D /* ListViewViewModel.swift */; };
 		8CD8C5E12ADE0AF000051D9D /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8C5E02ADE0AF000051D9D /* ListView.swift */; };
 		8CD8C5E32ADE0B1600051D9D /* VideoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8C5E22ADE0B1600051D9D /* VideoDetailView.swift */; };
-		8CD8C5E52ADE0B2800051D9D /* VideoDetailViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8C5E42ADE0B2800051D9D /* VideoDetailViewViewModel.swift */; };
+		8CD8C5E52ADE0B2800051D9D /* VideoDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8C5E42ADE0B2800051D9D /* VideoDetailViewModel.swift */; };
 		8CD8C5E72ADE0B5500051D9D /* PexelsAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8C5E62ADE0B5500051D9D /* PexelsAPIService.swift */; };
 		8CD8C5E92ADE0B6400051D9D /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8C5E82ADE0B6400051D9D /* RealmService.swift */; };
 		8CD8C5EC2ADE0B8200051D9D /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8C5EB2ADE0B8200051D9D /* Functions.swift */; };
 		8CD8C5EE2ADE0F9300051D9D /* VideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8C5ED2ADE0F9300051D9D /* VideoManager.swift */; };
 		8CD8C5F02ADE109100051D9D /* ConnectivityMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8C5EF2ADE109100051D9D /* ConnectivityMonitor.swift */; };
+		8CD8C5F22ADE449400051D9D /* FullScreenVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8C5F12ADE449400051D9D /* FullScreenVideoPlayer.swift */; };
+		8CD8C5F42ADE562900051D9D /* VideoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8C5F32ADE562900051D9D /* VideoRow.swift */; };
+		8CD8C5F62ADE79D800051D9D /* PlatziLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8C5F52ADE79D800051D9D /* PlatziLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,12 +67,15 @@
 		8CD8C5DE2ADE0A3300051D9D /* ListViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewViewModel.swift; sourceTree = "<group>"; };
 		8CD8C5E02ADE0AF000051D9D /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		8CD8C5E22ADE0B1600051D9D /* VideoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailView.swift; sourceTree = "<group>"; };
-		8CD8C5E42ADE0B2800051D9D /* VideoDetailViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailViewViewModel.swift; sourceTree = "<group>"; };
+		8CD8C5E42ADE0B2800051D9D /* VideoDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailViewModel.swift; sourceTree = "<group>"; };
 		8CD8C5E62ADE0B5500051D9D /* PexelsAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PexelsAPIService.swift; sourceTree = "<group>"; };
 		8CD8C5E82ADE0B6400051D9D /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		8CD8C5EB2ADE0B8200051D9D /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		8CD8C5ED2ADE0F9300051D9D /* VideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoManager.swift; sourceTree = "<group>"; };
 		8CD8C5EF2ADE109100051D9D /* ConnectivityMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityMonitor.swift; sourceTree = "<group>"; };
+		8CD8C5F12ADE449400051D9D /* FullScreenVideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenVideoPlayer.swift; sourceTree = "<group>"; };
+		8CD8C5F32ADE562900051D9D /* VideoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoRow.swift; sourceTree = "<group>"; };
+		8CD8C5F52ADE79D800051D9D /* PlatziLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatziLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +182,9 @@
 			children = (
 				8CD8C5E02ADE0AF000051D9D /* ListView.swift */,
 				8CD8C5E22ADE0B1600051D9D /* VideoDetailView.swift */,
+				8CD8C5F12ADE449400051D9D /* FullScreenVideoPlayer.swift */,
+				8CD8C5F32ADE562900051D9D /* VideoRow.swift */,
+				8CD8C5F52ADE79D800051D9D /* PlatziLoader.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -184,7 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				8CD8C5DE2ADE0A3300051D9D /* ListViewViewModel.swift */,
-				8CD8C5E42ADE0B2800051D9D /* VideoDetailViewViewModel.swift */,
+				8CD8C5E42ADE0B2800051D9D /* VideoDetailViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -358,14 +367,17 @@
 				8CD8C5F02ADE109100051D9D /* ConnectivityMonitor.swift in Sources */,
 				8CD8C5D72ADE08EA00051D9D /* User.swift in Sources */,
 				8CD8C5EE2ADE0F9300051D9D /* VideoManager.swift in Sources */,
+				8CD8C5F62ADE79D800051D9D /* PlatziLoader.swift in Sources */,
 				8CD8C5D52ADE08DF00051D9D /* Video.swift in Sources */,
 				8CD8C5E12ADE0AF000051D9D /* ListView.swift in Sources */,
+				8CD8C5F42ADE562900051D9D /* VideoRow.swift in Sources */,
 				8CD8C5DF2ADE0A3300051D9D /* ListViewViewModel.swift in Sources */,
 				8CD8C5E32ADE0B1600051D9D /* VideoDetailView.swift in Sources */,
 				8CD8C5DB2ADE090600051D9D /* VideoPicture.swift in Sources */,
-				8CD8C5E52ADE0B2800051D9D /* VideoDetailViewViewModel.swift in Sources */,
+				8CD8C5E52ADE0B2800051D9D /* VideoDetailViewModel.swift in Sources */,
 				8CD0DD572ADDF046007FD2D4 /* PruebaPlatziApp.swift in Sources */,
 				8CD8C5EC2ADE0B8200051D9D /* Functions.swift in Sources */,
+				8CD8C5F22ADE449400051D9D /* FullScreenVideoPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

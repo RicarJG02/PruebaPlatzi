@@ -8,8 +8,6 @@
 import Foundation
 import Network
 
-// MARK: - ConnectivityMonitor
-
 class ConnectivityMonitor: ObservableObject {
     
     private var monitor: NWPathMonitor
@@ -26,9 +24,11 @@ class ConnectivityMonitor: ObservableObject {
     func startMonitoring() {
         monitor.pathUpdateHandler = { [weak self] path in
             DispatchQueue.main.async {
-                self?.isConnected = path.status == .satisfied
-                print("Network status changed: \(self?.isConnected == true ? "connected" : "disconnected")")
+                let status = path.status
+                print("Network status changed: \(status)")
+                self?.isConnected = status == .satisfied
             }
+            print(path)
         }
         monitor.start(queue: queue)
     }

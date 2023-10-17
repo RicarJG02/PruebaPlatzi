@@ -10,27 +10,23 @@ import SwiftUI
 struct ListView: View {
     @StateObject private var viewModel = ListViewViewModel()
     @StateObject private var connectivityMonitor = ConnectivityMonitor()
-        
+    
+    @State private var showErrorAlert = false
+    @State private var errorMessage = ""
+    
     var body: some View {
         NavigationView {
-            List(viewModel.videos) { video in
-                NavigationLink(destination: Text("Detalles de video aquí")) {
-                    HStack {
-                        AsyncImage(url: URL(string: video.image)) { phase in
-                            switch phase {
-                            case .empty: ProgressView()
-                            case .success(let image): image.resizable()
-                            case .failure: Image(systemName: "xmark.circle")
-                            @unknown default: ProgressView()
-                            }
+            Group {
+                if viewModel.isLoading {
+                    PlatziLoader()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else {
+                    List(viewModel.videos.filter { !$0.isVertical }) { video in
+                        ZStack {
+                            VideoRow(video: video)
+                            NavigationLink("", destination: Text("Detalles de video aquí")).opacity(0)
                         }
-                        .frame(width: 50, height: 50)
-                        .aspectRatio(contentMode: .fill)
-                        
-                        VStack(alignment: .leading) {
-                            Text(video.user?.name ?? "Desconocido")
-                            Text(video.durationText)
-                        }
+                        .padding(.vertical, 1)
                     }
                 }
             }
@@ -43,8 +39,20 @@ struct ListView: View {
             .refreshable(action: viewModel.refreshVideos)
             .onReceive(viewModel.$error) { error in
                 if let error = error {
-                    // Manejar el error aquí
+                    errorMessage = error.localizedDescription
+                    showErrorAlert = true
                 }
+            }
+            .onAppear(perform: {
+                connectivityMonitor.startMonitoring()
+            })
+            .onDisappear(perform: {
+                connectivityMonitor.stopMonitoring()
+            })
+            .alert(isPresented: $showErrorAlert) {
+                Alert(title: Text("Error"),
+                      message: Text(errorMessage),
+                      dismissButton: .default(Text("Aceptar")))
             }
         }
     }

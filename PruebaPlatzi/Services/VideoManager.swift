@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Network
 
 // MARK: - VideoManager
 
@@ -32,6 +31,7 @@ class VideoManager {
                         do {
                             let updatedVideoUrl = try await apiService.downloadVideo(videoUrl: videoURL)
                             tmpVideo.localUrl = updatedVideoUrl.absoluteString
+                            print("LocalURL:\(tmpVideo.localUrl ?? "")🔥")
                             return tmpVideo
                         } catch {
                             print("Error downloading video:", error)
@@ -48,7 +48,6 @@ class VideoManager {
                         downloadedVideos.append(video)
                     }
                 } catch {
-                    // Handle error
                     print("Error:", error)
                 }
             }
