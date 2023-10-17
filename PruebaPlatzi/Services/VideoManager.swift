@@ -76,7 +76,7 @@ class VideoManager {
                     do {
                         let updatedVideoUrl = try await apiService.downloadVideo(videoUrl: videoURL)
                         tmpVideo.localUrl = updatedVideoUrl.absoluteString
-                        print("LocalURL:\(tmpVideo.localUrl ?? "")🔥Mi bro")
+                        print("LocalURL:\(tmpVideo.localUrl ?? "")🔥")
                         return tmpVideo
                     } catch {
                         print("Error downloading video:", error)
