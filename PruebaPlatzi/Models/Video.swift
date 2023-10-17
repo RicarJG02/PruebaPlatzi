@@ -17,6 +17,7 @@ class Video: Object, Identifiable, Decodable {
     @objc dynamic var duration: Int = 0
     @objc dynamic var user: User?
     @objc dynamic var localUrl: String? = nil
+    @objc dynamic var localImageUrl: String? = nil
     var videoFiles = List<VideoFile>()
     var videoPictures = List<VideoPicture>()
     override static func primaryKey() -> String? {

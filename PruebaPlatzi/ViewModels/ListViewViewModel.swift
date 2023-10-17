@@ -24,9 +24,8 @@ class ListViewViewModel: ObservableObject {
         isLoading = true
         Task {
             do {
-                let videosFetched = try await videoManager.loadVideos()
+                let videosFetched = try await VideoLoader().fetchAndUpdateVideos()
                 DispatchQueue.main.async {
-                    // Convierte los objetos en objetos seguros para pasar entre hilos aquí, si es necesario.
                     self.videos = videosFetched
                     self.isLoading = false
                 }
@@ -36,22 +35,6 @@ class ListViewViewModel: ObservableObject {
                     self.isLoading = false
                 }
             }
-            /*
-             do {
-                 let videosFetched = try await videoManager.loadVideos()
-                 let filteredVideos = videosFetched.filter { !$0.isVertical }
-                 DispatchQueue.main.async {
-                     // Convierte los objetos en objetos seguros para pasar entre hilos aquí, si es necesario.
-                     self.videos = filteredVideos
-                     self.isLoading = false
-                 }
-             } catch {
-                 DispatchQueue.main.async {
-                     self.error = error
-                     self.isLoading = false
-                 }
-             }
-             */
         }
     }
 
@@ -59,3 +42,21 @@ class ListViewViewModel: ObservableObject {
         fetchVideos()
     }
 }
+
+
+/*
+ do {
+     let videosFetched = try await videoManager.loadVideos()
+     let filteredVideos = videosFetched.filter { !$0.isVertical }
+     DispatchQueue.main.async {
+         // Convierte los objetos en objetos seguros para pasar entre hilos aquí, si es necesario.
+         self.videos = filteredVideos
+         self.isLoading = false
+     }
+ } catch {
+     DispatchQueue.main.async {
+         self.error = error
+         self.isLoading = false
+     }
+ }
+ */

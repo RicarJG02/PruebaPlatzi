@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 // MARK: - PexelsAPIService
 
@@ -19,8 +20,9 @@ class PexelsAPIService {
     
     enum PexelsAPIError: Error {
         case videoDownloadFailed
+        case imageDownloadFailed
     }
-    
+
     // Fetch videos from the API
     func fetchVideos() async throws -> [Video] {
         guard let url = URL(string: baseUrl + "videos/popular?per_page=10") else {
@@ -43,32 +45,35 @@ class PexelsAPIService {
             throw error
         }
     }
-    
-    // Function to download a video and return the local URL
+
+    // Download image and return the local URL
+    func downloadImage(imageUrl: URL) async throws -> URL {
+        let (data, _) = try await URLSession.shared.data(from: imageUrl)
+        let fileURL = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString).appendingPathExtension("jpg")
+        try data.write(to: fileURL)
+        return fileURL
+    }
+
+    // Download video and return the local URL
     func downloadVideo(videoUrl: URL) async throws -> URL {
-        let (downloadedUrl, _) = try await URLSession.shared.download(from: videoUrl)
-        let localURL = FileManager.default.temporaryDirectory.appendingPathComponent(videoUrl.lastPathComponent)
+        let (data, _) = try await URLSession.shared.data(from: videoUrl)
+        let fileURL = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString).appendingPathExtension("mp4")
+        try data.write(to: fileURL)
+        return fileURL
+    }
+}
+
+// MARK: - Video Loading and Storing
+
+class VideoLoader {
+    private let videoManager = VideoManager()
+    private let realmService = RealmService()
+
+    func fetchAndUpdateVideos() async throws -> [Video] {
+        // Primero, descargamos y almacenamos los metadatos (incluidas las imágenes).
+        try await videoManager.downloadAndStoreMetadata()
         
-        // Remove the file if it already exists at the localURL
-        if FileManager.default.fileExists(atPath: localURL.path) {
-            try FileManager.default.removeItem(at: localURL)
-        }
-        
-        // Move the downloaded file to the localURL
-        do {
-            try FileManager.default.moveItem(at: downloadedUrl, to: localURL)
-        } catch {
-            print("Error saving video:", error)
-            throw error
-        }
-        
-        // Check if the video was saved successfully
-        if FileManager.default.fileExists(atPath: localURL.path) {
-            print("Video saved successfully at:", localURL.path)
-            return localURL
-        } else {
-            print("Video not found at localURL")
-            throw PexelsAPIError.videoDownloadFailed
-        }
+        // Luego, descargamos y almacenamos los videos usando el método `loadVideos` de VideoManager.
+        return try await videoManager.downloadVideos()
     }
 }
