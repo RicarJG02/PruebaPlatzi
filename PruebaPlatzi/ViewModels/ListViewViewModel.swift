@@ -71,20 +71,3 @@ class ListViewViewModel: ObservableObject {
         fetchVideos()
     }
 }
-
-/*
- do {
-     let videosFetched = try await videoManager.loadVideos()
-     let filteredVideos = videosFetched.filter { !$0.isVertical }
-     DispatchQueue.main.async {
-         // Convierte los objetos en objetos seguros para pasar entre hilos aquí, si es necesario.
-         self.videos = filteredVideos
-         self.isLoading = false
-     }
- } catch {
-     DispatchQueue.main.async {
-         self.error = error
-         self.isLoading = false
-     }
- }
- */

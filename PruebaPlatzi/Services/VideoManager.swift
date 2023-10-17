@@ -18,10 +18,14 @@ class VideoManager {
         return connectivityMonitor.isConnected
     }
     
+    enum VideoManagerError: Error {
+        case noInternetConnection
+    }
+    
     func downloadAndStoreMetadata() async throws {
         guard isConnectedToInternet else {
             print("No hay conexión a Internet.")
-            return
+            throw VideoManagerError.noInternetConnection
         }
         
         let videos = try await fetchVideosFromAPI()
@@ -56,13 +60,14 @@ class VideoManager {
                 print("Error:", error)
             }
         }
+        
         try await realmService.saveAndFetchMetadata(videos: updatedVideos)
     }
     
     func downloadVideos() async throws -> [Video] {
         guard isConnectedToInternet else {
             print("No hay conexión a Internet.")
-            return []
+            throw VideoManagerError.noInternetConnection
         }
         
         let videos = try await fetchVideosFromAPI()
@@ -109,8 +114,7 @@ class VideoManager {
         }
     }
 
-    private func fetchVideosFromAPI() async throws -> [Video] {
+    func fetchVideosFromAPI() async throws -> [Video] {
         try await apiService.fetchVideos()
     }
 }
-

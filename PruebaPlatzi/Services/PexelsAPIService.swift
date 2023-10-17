@@ -70,10 +70,18 @@ class VideoLoader {
     private let realmService = RealmService()
 
     func fetchAndUpdateVideos() async throws -> [Video] {
-        // Primero, descargamos y almacenamos los metadatos (incluidas las imágenes).
         try await videoManager.downloadAndStoreMetadata()
         
-        // Luego, descargamos y almacenamos los videos usando el método `loadVideos` de VideoManager.
-        return try await videoManager.downloadVideos()
+        let videosFromAPI = try await videoManager.fetchVideosFromAPI()
+
+        async {
+            do {
+                _ = try await videoManager.downloadVideos()
+            } catch {
+                print("Error downloading videos: \(error)")
+            }
+        }
+        
+        return videosFromAPI
     }
 }
