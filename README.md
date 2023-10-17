@@ -1,5 +1,7 @@
 # PruebaPlatzi
 
+- **Ricardo Guerrero**
+
 ## Guía del Proyecto
 
 ### Entorno de Desarrollo
