@@ -15,7 +15,7 @@ class VideoFile: Object, Identifiable, Decodable {
     var width = RealmOptional<Int>()
     var height = RealmOptional<Int>()
     @objc dynamic var link: String = ""
-
+    
     override static func primaryKey() -> String? {
         return "id"
     }

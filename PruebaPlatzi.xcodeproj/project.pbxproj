@@ -26,6 +26,8 @@
 		8CD8C5E72ADE0B5500051D9D /* PexelsAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8C5E62ADE0B5500051D9D /* PexelsAPIService.swift */; };
 		8CD8C5E92ADE0B6400051D9D /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8C5E82ADE0B6400051D9D /* RealmService.swift */; };
 		8CD8C5EC2ADE0B8200051D9D /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8C5EB2ADE0B8200051D9D /* Functions.swift */; };
+		8CD8C5EE2ADE0F9300051D9D /* VideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8C5ED2ADE0F9300051D9D /* VideoManager.swift */; };
+		8CD8C5F02ADE109100051D9D /* ConnectivityMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8C5EF2ADE109100051D9D /* ConnectivityMonitor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +68,8 @@
 		8CD8C5E62ADE0B5500051D9D /* PexelsAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PexelsAPIService.swift; sourceTree = "<group>"; };
 		8CD8C5E82ADE0B6400051D9D /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		8CD8C5EB2ADE0B8200051D9D /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
+		8CD8C5ED2ADE0F9300051D9D /* VideoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoManager.swift; sourceTree = "<group>"; };
+		8CD8C5EF2ADE109100051D9D /* ConnectivityMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityMonitor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +193,8 @@
 			isa = PBXGroup;
 			children = (
 				8CD8C5E62ADE0B5500051D9D /* PexelsAPIService.swift */,
+				8CD8C5ED2ADE0F9300051D9D /* VideoManager.swift */,
+				8CD8C5EF2ADE109100051D9D /* ConnectivityMonitor.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -349,7 +355,9 @@
 				8CD8C5D92ADE08F700051D9D /* VideoFile.swift in Sources */,
 				8CD8C5E92ADE0B6400051D9D /* RealmService.swift in Sources */,
 				8CD8C5E72ADE0B5500051D9D /* PexelsAPIService.swift in Sources */,
+				8CD8C5F02ADE109100051D9D /* ConnectivityMonitor.swift in Sources */,
 				8CD8C5D72ADE08EA00051D9D /* User.swift in Sources */,
+				8CD8C5EE2ADE0F9300051D9D /* VideoManager.swift in Sources */,
 				8CD8C5D52ADE08DF00051D9D /* Video.swift in Sources */,
 				8CD8C5E12ADE0AF000051D9D /* ListView.swift in Sources */,
 				8CD8C5DF2ADE0A3300051D9D /* ListViewViewModel.swift in Sources */,
