@@ -12,6 +12,12 @@ import RealmSwift
 
 class RealmService {
     
+    private let realm: Realm
+    
+    init(realm: Realm = try! Realm()) {
+        self.realm = realm
+    }
+    
     // Guarda los videos en Realm de forma asíncrona y luego los devuelve
     @discardableResult
     func saveAndFetchVideos(videos: [Video]) async throws -> [Video] {
@@ -66,7 +72,7 @@ class RealmService {
             }
         }
     }
-
+    
     // Recupera los metadatos de los videos de Realm de forma asíncrona
     func fetchMetadataFromRealm() async throws -> [Video] {
         return try await withCheckedThrowingContinuation { continuation in

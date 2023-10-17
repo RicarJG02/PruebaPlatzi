@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import RealmSwift
 
 // MARK: - PexelsAPIService
 
@@ -22,7 +21,7 @@ class PexelsAPIService {
         case videoDownloadFailed
         case imageDownloadFailed
     }
-
+    
     // Fetch videos from the API
     func fetchVideos() async throws -> [Video] {
         guard let url = URL(string: baseUrl + "videos/popular?per_page=10") else {
@@ -45,7 +44,7 @@ class PexelsAPIService {
             throw error
         }
     }
-
+    
     // Download image and return the local URL
     func downloadImage(imageUrl: URL) async throws -> URL {
         let (data, _) = try await URLSession.shared.data(from: imageUrl)
@@ -53,13 +52,23 @@ class PexelsAPIService {
         try data.write(to: fileURL)
         return fileURL
     }
-
+    
     // Download video and return the local URL
     func downloadVideo(videoUrl: URL) async throws -> URL {
+        // Obtener el nombre esperado del archivo local basado en la URL del video
+        let expectedLocalURL = FileManager.default.temporaryDirectory.appendingPathComponent(videoUrl.lastPathComponent)
+        
+        // Verificar si el video ya existe localmente
+        if FileManager.default.fileExists(atPath: expectedLocalURL.path) {
+            print("Video ya existe localmente, omitiendo la descarga.")
+            return expectedLocalURL
+        }
+        
+        // Si el video no existe localmente, proceder con la descarga
         let (data, _) = try await URLSession.shared.data(from: videoUrl)
-        let fileURL = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString).appendingPathExtension("mp4")
-        try data.write(to: fileURL)
-        return fileURL
+        
+        try data.write(to: expectedLocalURL)
+        return expectedLocalURL
     }
 }
 

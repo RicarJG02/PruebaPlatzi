@@ -31,6 +31,8 @@
 		8CD8C5F22ADE449400051D9D /* FullScreenVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8C5F12ADE449400051D9D /* FullScreenVideoPlayer.swift */; };
 		8CD8C5F42ADE562900051D9D /* VideoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8C5F32ADE562900051D9D /* VideoRow.swift */; };
 		8CD8C5F62ADE79D800051D9D /* PlatziLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8C5F52ADE79D800051D9D /* PlatziLoader.swift */; };
+		8CF2057F2ADF298900B2D745 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8CF2057E2ADF298900B2D745 /* RealmSwift */; };
+		8CF205832ADF2BFD00B2D745 /* ConnectivityMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8C5EF2ADE109100051D9D /* ConnectivityMonitor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CF2057F2ADF298900B2D745 /* RealmSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +115,7 @@
 				8CD0DD662ADDF048007FD2D4 /* PruebaPlatziTests */,
 				8CD0DD702ADDF048007FD2D4 /* PruebaPlatziUITests */,
 				8CD0DD542ADDF046007FD2D4 /* Products */,
+				8CF2057D2ADF298900B2D745 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -224,6 +228,13 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		8CF2057D2ADF298900B2D745 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -262,6 +273,9 @@
 				8CD0DD652ADDF048007FD2D4 /* PBXTargetDependency */,
 			);
 			name = PruebaPlatziTests;
+			packageProductDependencies = (
+				8CF2057E2ADF298900B2D745 /* RealmSwift */,
+			);
 			productName = PruebaPlatziTests;
 			productReference = 8CD0DD632ADDF048007FD2D4 /* PruebaPlatziTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -386,6 +400,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CD0DD682ADDF048007FD2D4 /* PruebaPlatziTests.swift in Sources */,
+				8CF205832ADF2BFD00B2D745 /* ConnectivityMonitor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -727,6 +742,11 @@
 			productName = Realm;
 		};
 		8CD8C5D22ADE082700051D9D /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8CD8C5CF2ADE082700051D9D /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		8CF2057E2ADF298900B2D745 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8CD8C5CF2ADE082700051D9D /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;

@@ -40,7 +40,6 @@ class ListViewViewModel: ObservableObject {
                         self.isLoading = false
                     }
                 } catch {
-                    // Si hay un error al obtener los videos desde el API, intentamos obtenerlos desde Realm.
                     fetchVideosFromDatabase()
                 }
             }

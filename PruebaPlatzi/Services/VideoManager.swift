@@ -30,11 +30,11 @@ class VideoManager {
         
         let videos = try await fetchVideosFromAPI()
         var updatedVideos: [Video] = []
-
+        
         let metadataDownloadTasks = videos.map { video in
             return Task<Video?, Error> {
                 let tmpVideo = video
-
+                
                 // Descargar y guardar la imagen
                 let imageUrlString = video.image
                 if let imageUrl = URL(string: imageUrlString) {
@@ -50,7 +50,7 @@ class VideoManager {
                 return tmpVideo
             }
         }
-
+        
         for task in metadataDownloadTasks {
             do {
                 if let video = try await task.value {
@@ -69,12 +69,22 @@ class VideoManager {
             throw VideoManagerError.noInternetConnection
         }
         
-        let videos = try await fetchVideosFromAPI()
+        let videosFromAPI = try await fetchVideosFromAPI()
         var downloadedVideos: [Video] = []
-            
-        let downloadTasks = videos.map { video in
+                
+        let downloadTasks = videosFromAPI.map { video in
             return Task<Video?, Error> {
                 let tmpVideo = video
+                
+                // Verificar si el video ya existe en el almacenamiento local usando FileManager
+                if let localUrlString = tmpVideo.localUrl,
+                   let localURL = URL(string: localUrlString),
+                   FileManager.default.fileExists(atPath: localURL.path) {
+                    print("Video ya existe localmente, omitiendo la descarga.")
+                    return tmpVideo
+                }
+                
+                // Continuar con la descarga si el video no existe localmente
                 if let videoString = video.videoFiles.first?.link,
                    let videoURL = URL(string: videoString) {
                     do {
@@ -90,7 +100,7 @@ class VideoManager {
                 return nil
             }
         }
-            
+        
         for task in downloadTasks {
             do {
                 if let video = try await task.value {
@@ -112,7 +122,7 @@ class VideoManager {
             return try await realmService.fetchVideosFromRealm()
         }
     }
-
+    
     func fetchVideosFromAPI() async throws -> [Video] {
         try await apiService.fetchVideos()
     }
