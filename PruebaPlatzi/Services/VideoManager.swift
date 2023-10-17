@@ -33,7 +33,7 @@ class VideoManager {
 
         let metadataDownloadTasks = videos.map { video in
             return Task<Video?, Error> {
-                var tmpVideo = video
+                let tmpVideo = video
 
                 // Descargar y guardar la imagen
                 let imageUrlString = video.image
@@ -60,8 +60,7 @@ class VideoManager {
                 print("Error:", error)
             }
         }
-        
-        try await realmService.saveAndFetchMetadata(videos: updatedVideos)
+        _ = try await realmService.saveAndFetchMetadata(videos: updatedVideos)
     }
     
     func downloadVideos() async throws -> [Video] {
@@ -75,7 +74,7 @@ class VideoManager {
             
         let downloadTasks = videos.map { video in
             return Task<Video?, Error> {
-                var tmpVideo = video
+                let tmpVideo = video
                 if let videoString = video.videoFiles.first?.link,
                    let videoURL = URL(string: videoString) {
                     do {

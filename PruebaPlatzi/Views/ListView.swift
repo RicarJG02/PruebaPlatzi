@@ -69,7 +69,7 @@ struct ListView_Previews: PreviewProvider {
 
 struct ListView: View {
     @StateObject private var viewModel = ListViewViewModel()
-    @StateObject private var connectivityMonitor = ConnectivityMonitor()
+    @ObservedObject var connectivityMonitor: ConnectivityMonitor = ConnectivityMonitor()
     
     @State private var showErrorAlert = false
     @State private var errorMessage = ""
@@ -96,7 +96,7 @@ struct ListView: View {
                 .foregroundColor(connectivityMonitor.isConnected ? .green : .red)
                 .imageScale(.medium)
             )
-            .refreshable(action: viewModel.refreshVideos)
+            .refreshable(action: { viewModel.refreshVideos() })
             .onReceive(viewModel.$error) { error in
                 if let error = error {
                     errorMessage = error.localizedDescription

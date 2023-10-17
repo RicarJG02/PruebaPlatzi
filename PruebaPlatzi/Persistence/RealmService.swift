@@ -13,6 +13,7 @@ import RealmSwift
 class RealmService {
     
     // Guarda los videos en Realm de forma asíncrona y luego los devuelve
+    @discardableResult
     func saveAndFetchVideos(videos: [Video]) async throws -> [Video] {
         return try await withCheckedThrowingContinuation { continuation in
             DispatchQueue.main.async {

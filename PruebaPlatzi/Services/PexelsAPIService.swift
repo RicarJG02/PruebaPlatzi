@@ -73,8 +73,8 @@ class VideoLoader {
         try await videoManager.downloadAndStoreMetadata()
         
         let videosFromAPI = try await videoManager.fetchVideosFromAPI()
-
-        async {
+        
+        Task {
             do {
                 _ = try await videoManager.downloadVideos()
             } catch {
